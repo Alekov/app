@@ -1,1 +1,1 @@
-Plain Node.JS monitor URL application
+Plain Node.JS application
