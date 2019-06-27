@@ -7,6 +7,7 @@
 var http = require('http');
 var url = require('url');
 var stringDecoder = require('string_decoder').StringDecoder;
+var config = require('./config');
 
 // Creating server
 var server = http.createServer(function(req, res) {
@@ -65,6 +66,7 @@ var server = http.createServer(function(req, res) {
 			var payloadString = JSON.stringify(payload);
 
 			// Return the response
+			res.setHeader('Content-Type', 'application/json');
 			res.writeHead(statusCode);
 			res.end(payloadString);
 
@@ -72,14 +74,11 @@ var server = http.createServer(function(req, res) {
 			console.log('Returning this response:', statusCode, payloadString);
 		});
 	});
-
-	//console.log('Request recieved with these headers', headers);
-	//console.log('Request recieved on this path: ' + trimmedPath + ' with this method: ' + method + ' and with these query string parameters ', queryStringObject);
 });
 
-// Start the server, and have it listen on port 3000
-server.listen(3000, function() {
-  console.log('The server is listening on port 3000');
+// Start the server
+server.listen(config.port, function() {
+  console.log('The server is listening on port ' + config.port + ' in ' + config.envName + ' node');
 });
 
 // Define handlers
@@ -102,3 +101,5 @@ handlers.nootFound = function(data, callback) {
 var router = {
 	'sample': handlers.sample
 };
+
+console.log(config);
