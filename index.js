@@ -101,5 +101,3 @@ handlers.nootFound = function(data, callback) {
 var router = {
 	'sample': handlers.sample
 };
-
-console.log(config);
