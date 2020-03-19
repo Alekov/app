@@ -11,6 +11,13 @@ var stringDecoder = require('string_decoder').StringDecoder;
 var config = require('./config');
 var fs = require('fs');
 
+// Testing
+// @TODO: delete this
+var _data = require('./lib/data');
+_data.delete('test', 'newFile', function (err) {
+	console.log('This was the error', err);
+});
+
 // Instantiate the HTTP server
 var httpServer = http.createServer(function(req, res) {
 	unifiedServer(req, res);
@@ -105,18 +112,17 @@ var unifiedServer = function (req, res) {
 // Define handlers
 var handlers = {};
 
-// Sample handler
-handlers.sample = function(data, callback) {
-	// Callback a http status code, and a payload object
-	callback(200, {'name': 'sample handler'});
+// Ping handler
+handlers.ping = function (data, callback) {
+	callback(200);
 };
 
 // Define not found handler
-handlers.notFound = function(data, callback) {
+handlers.notFound = function (data, callback) {
 	callback(404);
 };
 
 // Define a request router
 var router = {
-	'sample': handlers.sample
+	'ping': handlers.ping
 };
