@@ -67,7 +67,7 @@ var unifiedServer = function (req, res) {
 
 		// Choose the handler this req thould go to.
 		// If one is not found use not found handler
-		var chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.nootFound;
+		var chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
 		// Construct the data object to send to the handler
 		var data = {
@@ -108,13 +108,11 @@ var handlers = {};
 // Sample handler
 handlers.sample = function(data, callback) {
 	// Callback a http status code, and a payload object
-	callback(200, {
-		'name': 'sample handler'
-	});
+	callback(200, {'name': 'sample handler'});
 };
 
 // Define not found handler
-handlers.nootFound = function(data, callback) {
+handlers.notFound = function(data, callback) {
 	callback(404);
 };
 
