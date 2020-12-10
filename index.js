@@ -59,11 +59,11 @@ var unifiedServer = function (req, res) {
 	// Get the payload, if there is any
 	var decoder = new stringDecoder('utf-8');
 	var buffer = '';
-	
+
 	req.on('data', function(data) {
 		buffer += decoder.write(data);
 	});
-	
+
 	req.on('end', function() {
 		buffer += decoder.end();
 
@@ -86,7 +86,7 @@ var unifiedServer = function (req, res) {
 			// or default to 200.
 			statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
 
-			// Use the payload called back by the handler, 
+			// Use the payload called back by the handler,
 			// or an empty onject.
 			payload = typeof(payload) == 'object' ? payload : {};
 
